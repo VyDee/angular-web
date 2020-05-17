@@ -1,0 +1,5 @@
+Style element in the component.ts file is specifically used for that certain element only, it can't  be used 
+for others
+For example:
+    event-thumbnail template with .pad-left class won't affect the parent html(event-list template)
+However, there is a way to get around this.

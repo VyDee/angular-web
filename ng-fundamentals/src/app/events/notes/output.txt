@@ -1,0 +1,28 @@
+Communicate with Parent component using @Output
+_________________________________________________________________________________________
+** (events-list.components.ts)
+export class EventsListComponent{    
+    handleEventClicked(data)
+    {
+        console.log('received:', data)
+    }
+}
+_________________________________________________________________________________________
+** (events-list.component.html)
+<div>
+    <h1>Upcoming Angular Events</h1>
+    <hr/>
+    <!--(eventClick) is matched with the event-thumbnail in the component class-->
+    <event-thumbnail (eventClick) = "handleEventClicked($event)" [event] = "event1">
+    </event-thumbnail>
+</div>
+__________________________________________________________________________________________
+
+** (event-thumbnail.component.ts)
+export class EventThumbnailComponent {
+    @Output() eventClick = new EventEmitter()
+
+    handleClickMe() {
+        this.eventClick.emit(this.event.name)
+    }
+}

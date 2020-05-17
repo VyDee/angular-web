@@ -1,0 +1,5 @@
+How to do routing?
+    1. Add <router-outlet> to the events-app.component.ts
+    2. We define the route for each of our page in routes.ts file including the default link
+    3.Load our RouteModule into app.module.ts
+    4. add a base tag to the index.html page <base href="/"

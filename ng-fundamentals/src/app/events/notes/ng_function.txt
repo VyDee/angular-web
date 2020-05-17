@@ -1,0 +1,119 @@
+* is the symbol that indicates somthing is a structural directive
+
+Structual directives are different from other directives because they actually change the shape of the DOM.
+They add or remove (not hide) HTML elements from the HTML document. 
+____________________________________________________________________________________________________________
+
+*ngFor is a structural directive 
+    -- lets you loop the data
+    Example: 
+        <event-thumbnail *ngFor="let event of events" [event] = "event"></event-thumbnail>
+
+        => events : is an array
+____________________________________________________________________________________________________________
+
+*ngIf is a structural directive
+    -- allows us to show content only if it evaluates to true, so hiding these fields is easy
+
+--How to hide an element using ngIf
+
+--Solution 1:
+    <div *ngIf ="event?.onlineUrl">
+                Online URL: {{event?.onlineUrl}}
+    </div>
+//Note: event? means that we are asking the question to make sure the event data shows up if it stores data and
+//not show up or cause error if it is null
+==> This solution show or remove the element completely if you don't need them
+
+
+--Solution 2: use data binding to bind hidden element of html to the condiditon
+    <div [hidden] = "!event?.onlineUrl">
+        Online URL: {{event?.onlineUrl}}
+    </div>
+//Asking if the event doesn't have the onlineUrl location, then hide it, else turn it on
+==> This solution can be used if you show or hide an element frequently. This solution will bind the "hidden" 
+property to the HTML
+____________________________________________________________________________________________________________
+
+ngSwitch is a structural directive
+    -- specify an expression to match against. The expressions to match are provided by ngSwitchCase
+    directives on views within the container.
+        ** Every view that matches is rendered
+        ** If there are no matches, a view with the ngSwitchDefault directive is rendered
+        ** Element within the [NgSwitch] statement but outside of any NgSwitchCase or ngSwitchDefault
+        directive are preserved at the location
+
+    -- ngSwitch and ngSwitchCase should use the same data type
+
+    Example:
+    <div [ngSwitch]="event?.time">
+        Time: {{event?.time}}
+        <span *ngSwitchCase="'8:00 am'">(Early Start)</span>
+        <span *ngSwitchCase="'10:00 am'">(Late Start)</span>
+        <span *ngSwitchDefault >(Normal Start)</span>
+    </div>
+
+____________________________________________________________________________________________________________
+
+ngClass is a structural directive
+    -- Adds and removes CSS classes on an HTML element
+    -- if on the <div> has both class="..." and [ngClass], the div would have class="..." as default and ngClass
+    adds more CSS class (*) to the class="....*"
+
+    Example:
+        (event-thumbnail.component.html)
+            <div [ngClass]="getStartTimeClass()" [ngSwitch]="event?.time">
+                Time: {{event?.time}}
+                <span *ngSwitchCase="'8:00 am'">(Early Start)</span>
+                <span *ngSwitchCase="'10:00 am'">(Late Start)</span>
+                <span *ngSwitchDefault >(Normal Start)</span>
+            </div>
+
+        (event-thumbnail.component.ts)
+            styles: 
+            [`.green {color: #003300 !important;}
+                .bold {font-weight: bold;}`]
+
+            export class EventThumbnailComponent {
+
+                //solution 1
+                getStartTimeClass()
+                {
+                    const isEarlyStart = this.event && this.event.time === '8:00 am'
+                    return{green: isEarlyStart, bold: isEarlyStart}
+                }
+
+                //solution 2 -- return a string
+                getStartTimeClass()
+                {
+                    if(this.event && this.event.time === '8:00 am')
+                        return 'green bold'
+                    return ''
+                }
+
+                //solution 3 -- return an array
+                getStartTimeClass()
+                {
+                    if(this.event && this.event.time === '8:00 am')
+                        return ['green', 'bold']
+                    return []
+                }
+            }
+
+____________________________________________________________________________________________________________
+ngStyle is a structural directive
+    -- add or remove style in a CSS class or element
+
+    Example:
+        (event-thumbnail.component.html)
+            <div [ngStyle]="getStartTimeStyle()" [ngSwitch]="event?.time">
+        
+        (event-thumbnail.component.ts)
+            export class EventThumbnailComponent {
+                getStartTimeStyle() :any
+                {
+                    if(this.event && this.event.time === '8:00 am')
+                        return {color: '#003300', 'font-weight': 'bold'}
+                    return {}
+                }
+            }

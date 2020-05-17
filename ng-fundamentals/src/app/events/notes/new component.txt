@@ -1,0 +1,1 @@
+** As we create <events-list>, we need to register it in app.module.ts

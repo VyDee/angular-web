@@ -1,0 +1,37 @@
+...
+@Component({
+    template:`
+        <h2>{{user.name}}</h2> 
+        <img [src]="user.imageUrl"/>
+        <button (click) = "doSomething()"></button>`
+})
+
+export class ProfileComponent{
+    user = {name: 'John Doe', imageUrl:'doe.com/profile.jpg'}
+
+    doSomething() {
+
+    }
+}
+
+***
+    Interpolation: {{user.name}} -- used when you want to display the data
+    Property Binding: [src]="user.imageUrl" -- used when you want to bind the data to the property of a DOM element
+
+    Expression restriction
+        Assignments (=, +=, ++, etc)
+        new Keyword
+        Expression Chaining with ;
+        Global namespace
+
+        Example: user.name is an example of the expression
+    
+    Event binding: (click)
+    Statement : doSomething
+
+    Event binding is binding the click event for a button to a "doSomething()" function
+
+    Statement restriction  
+        Assignments Except = (+=, ++, etc)
+        new Keyword
+        Global Namspace
