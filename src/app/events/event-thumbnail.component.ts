@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core'
+import { IEvent } from './shared/index'
 
 @Component({
     selector:'event-thumbnail',
@@ -32,7 +33,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core'
 export class EventThumbnailComponent {
     //Input means that the event will take the input as it is passed in
     //event: any --- means that we don't care what type that is
-    @Input() event: any 
+    @Input() event: IEvent
 
     getStartTimeStyle() :any
     {
