@@ -117,3 +117,18 @@ ngStyle is a structural directive
                     return {}
                 }
             }
+
+____________________________________________________________________________________________________________
+ngModel: Creates a FormControl instance from a domain model and binds it to a form control element.
+    Require us to define a name attribute
+
+    Example:
+        (login.component.html)
+        <input (ngModel)="userName" name="userName" id="userName" type="text" class="form-control" placeholder="User Name..." />
+    
+    //Note that if you bind something with ngModel, make sure you declare it in your component
+        (login.component.ts)
+        export class LoginComponent{
+            username
+            password
+        }

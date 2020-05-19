@@ -1,0 +1,17 @@
+banana Data binding
+
+[(...)]  -- This is a 2 way binding called banana in the box binding. 
+    (..) is used to bind in HTML to component directions and respond to events
+    [..] is used to bind in the component  to HTML directions and display data from a component to a page
+    ==> This banana is used because forms are used for editing existing data, so you will display the existing data
+        and as you type, you want to update the data in the component
+
+    For example [(ngModel)] = "userName"
+_______________________________________________________________________________________________________________
+
+Quick register note
+
+    As we need to use Authenticated service (auth.service.ts) throughout our module, we can register it in the 
+    app module (app.module.ts) and use it everywhere throughout the app. However, this can only apply to "providers"
+    
+    For imports and declarations for a certain module, you need to define them all in each module
