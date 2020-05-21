@@ -4,7 +4,8 @@ import {
         EventDetailsComponent,
         CreatEventComponent,
         EventRouteActivator,
-        EventListResolver
+        EventListResolver,
+        CreateSessionComponent
 } from './events/index'
 import { Error404Component } from './errors/404.component';
 
@@ -22,6 +23,7 @@ export const appRoutes:Routes = [
             //==> This makes sure that the page is not loaded until all the events load
             //==> since events are loaded to the route, they are only loaded once
         {path: 'events/:id', component: EventDetailsComponent, canActivate:[EventRouteActivator]}, //events/1 or /events/foo
+        {path:'events/session/new', component: CreateSessionComponent},
         {path: '404', component:Error404Component},
         {path: '', redirectTo: '/events', pathMatch: 'full'},  // if it is null then they will redirect back to the events path
         {path: 'user', loadChildren: './user/user.module#UserModule'} //when the path start with user => load UserModule for this path
