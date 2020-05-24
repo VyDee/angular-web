@@ -1,5 +1,7 @@
 banana Data binding
 
+FYI: https://blog.bitsrc.io/data-binding-in-angular-cbc433481cec
+
 [(...)]  -- This is a 2 way binding called banana in the box binding. 
     (..) is used to bind in HTML to component directions and respond to events
     [..] is used to bind in the component  to HTML directions and display data from a component to a page

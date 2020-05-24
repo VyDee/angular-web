@@ -1,0 +1,29 @@
+FYI: https://medium.com/@foolishneo/understanding-input-output-and-eventemitter-in-angular-c1aeb9fff594
+
+Input is used to receive data in whereas Output is used to send data out. 
+Output sends data out by exposing event producers, usually EventEmitter objects.
+
+@Component({
+  selector: 'todo-item',
+  ...
+})
+export class TodoItemComponent {
+  @Input()  item
+  @Output() onChange = new EventEmitter()
+}
+
+that means
+hey, I am expecting data being sent to me. I will receive it and store it into my item property
+by the way, I will produce and send data out via the onChange property.
+
+Let’s say you have a TodoList component that contains TodoItem component. In the TodoList template, you are expected to see
+...
+<todo-item
+  [item]="myTask"
+  (onChange)="handleChange($event)"
+</todo-item>
+...
+which means
+TodoList puts data values in its myTask property and passes it to TodoItem
+data emitted from TodoItem will be received and handled by the handleChange() function in TodoList
+
