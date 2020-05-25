@@ -1,0 +1,58 @@
+Filtering and sorting data
+
+Primitive identity
+    Example:
+        var a = 3;
+        var b = 3;
+        a === b TRUE
+        var c = a
+        a === c TRUE
+        a = 4;
+        a === c FALSE
+
+Object identity
+    -- object variable doesn't contain data like they do in Primitive
+    They are pointer to the data
+    Example:
+        var a = {}
+        var b = {}
+        a === b FALSE  //It doesn't matter if a and b has identical values, they are different objects
+
+        var c = a;  //It doesn't create a new object, it just points c at the same value with a
+        a === c TRUE //a and c are pointing at the same object
+
+        a.var1 = 3; //this actually changes the data and set var1 to be 3
+        a === c TRUE // same object
+
+        a = {} //change a to a new object, create a new slot with new value, a no longer points to the old slot, but the new one
+        a === c FALSE // a and c are not pointing to the same object anymore
+
+Mutability
+    -- is the fact that things like object can change.In Filtering and ordering in Angular, we are
+    talking about lists of data. We order and filter lists. Lists are implemented with arrays.
+    -- Arrays are just specific object type in javascript
+
+    Example 1:
+        [
+            { name: 'John' },
+            { name: 'Dave' },
+        ]
+
+Identity, Mutability, and Pipe
+    Impure Pipes
+        -- runs on every change detection cycle
+        --> This is a problem because that means sorting and filtering operation you write
+        will now run unnecessarily every time an event happens in your application. 
+        For example, every time you move the mouse, the pipe is going to execute and produce
+        the new filtered and sorted view of the data multiple times, possibly hundreds or thousands
+        of time
+    >>>> This is how Angular 1 works ==> which leads to performance problem
+
+    Recommended Filtering and sorting
+        Angular 2+ has recommended to sort your data in the component that displays the data.
+        That way you can filter or sort lists whenvever the source data changes because it is your
+        code that actually has to change the data
+
+        Do It Yourself
+            -- only updated when source data changes
+            -- more efficient
