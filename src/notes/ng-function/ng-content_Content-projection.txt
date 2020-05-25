@@ -51,3 +51,41 @@ used in (session-list.component.ts)
         </collapsible-well>
         </div>
     </div>
+_______________________________________________________________________________________________
+
+Another example of binding multiple content
+
+-->> (collapsible-well.component.ts)
+    @Component({
+        selector:'collapsible-well',
+        template:`
+        <div (click)="toggleContent()" class="well pointable">
+            <h4>
+                <ng-content select="[well-title]"></ng-content>
+            </h4>
+            <ng-content *ngIf="visible" select="[well-body]"></ng-content>
+        </div>
+        `,
+    })
+
+    >> select: is used to select a class, id or and attribute of an element
+              In this case [well-title] and [well-body] are attribute names that    
+              match with the html
+    
+-->> (session-list.component.ts)
+    <div class="row" *ngFor="let session of sessions">
+        <div class="col-md-10">
+        <collapsible-well>
+            <div well-title>
+            {{session.name}}
+            <i *ngIf="session.voters.length > 3" class="glyphicon glyphicon-fire" style="color:red"></i>
+            </div>
+            <div well-body>
+            <h6>{{session.presenter}}</h6>
+            <span>Duration: {{session.duration}}</span><br />
+            <span>Level: {{session.level}}</span>
+            <p>{{session.abstract}}</p>
+            </div>
+        </collapsible-well>
+        </div>
+    </div>
