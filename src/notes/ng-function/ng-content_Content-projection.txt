@@ -1,0 +1,53 @@
+>>> ng-content <<<
+
+FYI: https://medium.com/@joshblf/wtf-is-ng-content-8382b2a664e1
+
+How to use: 
+    You use the <ng-content></ng-content> tag as a placeholder for
+    the dynamic content, then when the template is parsed, Angular
+    will replace that placeholder tag with the html content for 
+    your page
+
+    This is called "content projection" because we are projecting 
+    content from the parent component into the designated child 
+    component
+
+    ng-content is similar to curly braces. However, the difference 
+    is where the value comes from. With normal curly brace interpolation
+    the value comes from the component. With ng-content the value comes 
+    from the component in its execution context.
+
+Example:
+(collapsible-well.component.ts)
+    import { Component, Input } from '@angular/core';
+
+    @Component({
+        selector:'collapsible-well',
+        template:`
+        <div (click)="toggleContent()" class="well pointable">
+            <h4 class="well-title">{{title}}</h4>
+            <ng-content *ngIf="visible" ></ng-content>
+        </div>
+        `
+    })
+
+    export class CollapsibleWellComponent {
+        @Input() title: string;
+        visible: boolean = true;
+
+        toggleContent() {
+            this.visible = !this.visible;
+        }
+    }
+
+used in (session-list.component.ts)
+    <div class="row" *ngFor="let session of sessions">
+        <div class="col-md-10">
+        <collapsible-well [title]="session.name">
+            <h6>{{session.presenter}}</h6>
+            <span>Duration: {{session.duration}}</span><br />
+            <span>Level: {{session.level}}</span>
+            <p>{{session.abstract}}</p>
+        </collapsible-well>
+        </div>
+    </div>
