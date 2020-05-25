@@ -1,0 +1,8 @@
+Pipes 
+    Purpose:
+        Formating
+    
+    Example:
+        {{event?.name | uppercase}}
+            >> We want to make all the event name to uppercase 
+            using uppercase pipe (event-thumbnail.component.ts)

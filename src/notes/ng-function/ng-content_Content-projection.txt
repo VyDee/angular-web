@@ -18,7 +18,7 @@ How to use:
     from the component in its execution context.
 
 Example:
-(collapsible-well.component.ts)
+-->> (collapsible-well.component.ts)
     import { Component, Input } from '@angular/core';
 
     @Component({
@@ -40,7 +40,7 @@ Example:
         }
     }
 
-used in (session-list.component.ts)
+-->> used in (session-list.component.ts)
     <div class="row" *ngFor="let session of sessions">
         <div class="col-md-10">
         <collapsible-well [title]="session.name">
