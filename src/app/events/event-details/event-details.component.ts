@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 import { EventService } from '../shared/event.service';
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Params } from '@angular/router'
 import { IEvent, ISession } from '../shared/index';
 
 @Component({
@@ -24,7 +24,15 @@ export class EventDetailsComponent {
     }
 
     ngOnInit(){
-        this.event = this.eventService.getEvent(+this.route.snapshot.params['id']) //+ is used to cast into a number
+        //This code is originally written for setting up route, but it is a bug in modal
+        //+ is used to cast into a number
+        // this.route.snapshot.params['id']: use to get the link on the server and extract the id parameter from it
+            // this.event = this.eventService.getEvent(+this.route.snapshot.params['id']) 
+        
+        this.route.params.forEach((params: Params) => {
+            this.event = this.eventService.getEvent(+params['id']);
+            this.addMode = false;
+        })
     }
 
     addSession() {

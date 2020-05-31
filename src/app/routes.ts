@@ -22,7 +22,10 @@ export const appRoutes:Routes = [
             //add data to the route as a property named events
             //==> This makes sure that the page is not loaded until all the events load
             //==> since events are loaded to the route, they are only loaded once
-        {path: 'events/:id', component: EventDetailsComponent, canActivate:[EventRouteActivator]}, //events/1 or /events/foo
+        {path: 'events/:id', component: EventDetailsComponent, canActivate:[EventRouteActivator]}, 
+            //events/1 or /events/foo
+            //Quick note -- a colon :id means that is an id parameter
+
         {path:'events/session/new', component: CreateSessionComponent},
         {path: '404', component:Error404Component},
         {path: '', redirectTo: '/events', pathMatch: 'full'},  // if it is null then they will redirect back to the events path
