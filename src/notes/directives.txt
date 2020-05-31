@@ -1,0 +1,18 @@
+Directives
+
+    -- are attributes 
+    -- For example: 
+        (navbar.component.html)
+        >>> <button class="btn btn-default" modal-trigger>
+            -->> modal-trigger is an attribute
+        
+        >>> <simple-modal title="Matching Sessions">
+            --> simple-modal is an element
+
+    Specific example can be found at 
+        (navbar.component.html)
+            <simple-modal>...</simple-modal>
+
+        (modal-trigger.directive.ts)
+
+        (simple-modal.component.ts)

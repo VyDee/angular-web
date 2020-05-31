@@ -14,16 +14,23 @@ import {
   SessionListComponent,
   DurationPipe
 } from './events/index'
+import{
+  JQ_TOKEN,
+  TOASTR_TOKEN,
+  Toastr,
+  CollapsibleWellComponent,
+  SimpleModalComponent,
+  ModalTriggerDirective
+} from './common/index'
 import { EventsAppComponent } from './events-app.component';
 import { NavBarComponent } from './nav/navbar.component';
-import { TOASTR_TOKEN, Toastr } from './common/toastr.service';
 import { appRoutes } from './routes';
 import { Error404Component } from './errors/404.component';
 import { AuthService } from './user/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CollapsibleWellComponent } from './common/collapsible-well.component';
 
-declare let toastr:Toastr
+let toastr:Toastr = window['toastr'];
+let jQuery = window['$']
 
 @NgModule({
   declarations: [
@@ -37,7 +44,9 @@ declare let toastr:Toastr
     CreateSessionComponent,
     SessionListComponent,
     CollapsibleWellComponent,
-    DurationPipe
+    SimpleModalComponent,
+    ModalTriggerDirective,
+    DurationPipe,
   ],
   imports: [
     BrowserModule,
@@ -46,12 +55,17 @@ declare let toastr:Toastr
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
-    EventService, //another way {provide: EventService, useValue: EventService}
+    EventService,
     {
       provide: TOASTR_TOKEN,
       useValue: toastr
     },
-    EventRouteActivator,
+    {
+      provide: JQ_TOKEN,
+      useValue: jQuery
+    },
+    EventRouteActivator,  //another way {provide: EventRouteActivator, useClass: EventRouteActivator}
+                          // when someone asks for the EventRouteActivator, useClass will be given a copy of EventRouteActivator
     EventListResolver,
     AuthService,
     {
