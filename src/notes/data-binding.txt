@@ -2,13 +2,149 @@ banana Data binding
 
 FYI: https://blog.bitsrc.io/data-binding-in-angular-cbc433481cec
 
-[(...)]  -- This is a 2 way binding called banana in the box binding. 
-    (..) is used to bind in HTML to component directions and respond to events
-    [..] is used to bind in the component  to HTML directions and display data from a component to a page
-    ==> This banana is used because forms are used for editing existing data, so you will display the existing data
-        and as you type, you want to update the data in the component
+**** One way binding from component to view template (HTML) ****
 
-    For example [(ngModel)] = "userName"
+    -->> Interpolation {{...}}
+        For example:
+
+        (template)
+            <div>
+                <h1>{{pageHeader? pageHeader : 'No header'}}</h1>
+                <h3>{{getFullName()}}</h3>
+                <img src='{{imagePath}}'/>
+            </div>
+        
+        (AppComponent)
+            export class AppComponent{
+                pageHeader: string = null;
+                imagePath: string = 'somepath.com/img';
+                isDisabled: boolean = false;
+
+                firstName: string = 'Tom';
+                lastName: string = 'Hopkins';
+
+                getFullName(): string {
+                    return this.firstName + ' ' + this.lastName;
+                }
+            }
+        
+        Results:
+            It would render on the HTML
+                h1: No header
+                h3: Tom Hopkins
+                img: show an image from the url link 
+    
+    -->> Property binding
+        (template)
+            <div>
+                <img [src]='imagePath/>
+            </div>
+        
+        -- Quick note:
+            >> Remember to enclose the property name with a pair of square brackets
+            >> Canonical form <button bind-disabled='isDisabled'></button>
+            >> Angular data binding sanitizes malicious content before displaying it
+    
+    -->> Property binding vs. Interpolation
+        -- Interpolation is a special syntax that Angular converts into a property binding
+        -- To concatenate strings we must use interpolation instead of property binding
+            Ex: <img src="http://.../{{imagePath}}"/>
+        -- To set an element property to a non-string data value, you must use property binding
+            Ex: <button [disabled]='isDisabled'></button>
+
+    -->> Attribute binding
+        -- Interpolation and property binding deal with binding Component class properties to 
+        HTML element properties and NOT ATTRIBUTES
+        -- But not all HTML element attributes have corresponding properties. For example, 'colspan'
+        attribute does not have a corresponding property
+        -- In situations like this we want to be able to bind to HTML element attributes
+        -- Hence, Angular provided Attribute binding
+        
+        -- For example
+            <th [attr.colspan]="columnSpan">
+            or
+            <th attr.colspan="{{columnSpan}}">
+    
+    -->> Class binding
+        -- For example:
+            >>> (html)
+            <!-Add classes to the class on the button
+            Replace all the existing CSS classes with one or more classes->
+            <button class="colorClass" [class]='classesToApply'>My button</button>
+
+            <!-remove boldClass
+            Add or remove a single CSS class->
+            <button class="colorClass italicsClass boldClass" [class.boldClass]='applyBoldClass'></button>
+
+            <!-Add multiple classes using a function->
+            <button class="colorClass" [ngClass]='addClasses()'></button>
+
+            >>> (component)
+            classesToApply: string = 'italicsClass boldClass';
+            applyBoldClass: boolean = false;
+            applyItalicsClass: boolean = true;
+
+            addClasses() {
+                let classes = {
+                    boldClass: this.applyBoldClass,
+                    italicsClass: this.applyItalicsClass
+                }
+                return classes;
+            }
+
+            >>> Results
+            Button 1 has class colorClass italicsClass boldClass
+            Button 2 has class colorClass italicsClass
+            Button 3 has class colorClass italicsClass
+    
+    -->> Style binding
+        -- For example:
+            >>> (html)
+            <button style='color:red;' [style.fontWeight]="isBold? 'bold':'normal'"></button>
+            <button style='color:red;' [style.font-size.px]="fontSize"></button>
+            <button style='color:red;' [ngStyle]="addStyles()"></button>
+
+            >>> (component)
+            isBold: boolean = true;
+            foneSize: number = 30;
+            isItalic: boolean = true;
+
+            addStyles() {
+                let styles = {
+                    'font-size.px' : this.foneSize,
+                    'font-style' : this.isItalic ? 'italic' : 'normal',
+                    'font-weight' : isBold? 'bold' : 'normal'
+                }
+                return styles;
+            }
+
+**** One way binding flows data from an HTML element to a component (Event Binding) ****
+    -->> Event Binding
+        -- For example:
+            (html)
+            <button (click)="onClick()"></button>
+
+            (component)
+            onClick() {
+                console.log("Button clicked");
+            }
+
+***  Two way binding (component to HTML and vice versa)
+    [(...)]  -- This is a 2 way binding called banana in the box binding. 
+
+        (..) is used to bind in HTML to component directions and respond to events
+            (from data source (our code attribute value) to view target (HTML code))
+
+        [..] is used to bind in the component  to HTML directions and display data from a component to a page
+            (from view target (our HTML) to data source (our component code))
+
+        ==> This banana is used because forms are used for editing existing data, so you will display the existing data
+            and as you type, you want to update the data in the component
+
+        -- For example 
+            (navbar.component.html)
+            <input [(ngModel)]="searchTerm" name="searchTerm" type="text" class="form-control" placeholder="Search Sessions" >
+
 _______________________________________________________________________________________________________________
 
 Quick register note

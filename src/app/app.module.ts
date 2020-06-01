@@ -12,7 +12,9 @@ import {
   EventListResolver,
   CreateSessionComponent,
   SessionListComponent,
-  DurationPipe
+  DurationPipe,
+  VoterService,
+  UpvoteComponent
 } from './events/index'
 import{
   JQ_TOKEN,
@@ -45,6 +47,7 @@ let jQuery = window['$']
     SessionListComponent,
     CollapsibleWellComponent,
     SimpleModalComponent,
+    UpvoteComponent,
     ModalTriggerDirective,
     DurationPipe,
   ],
@@ -67,6 +70,7 @@ let jQuery = window['$']
     EventRouteActivator,  //another way {provide: EventRouteActivator, useClass: EventRouteActivator}
                           // when someone asks for the EventRouteActivator, useClass will be given a copy of EventRouteActivator
     EventListResolver,
+    VoterService,
     AuthService,
     {
       provide:'canDeactivateCreateEvent',

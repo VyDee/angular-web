@@ -1,0 +1,27 @@
+FYI: Youtube video: https://www.youtube.com/watch?v=Ut-ATm23_Pg&list=PL6n9fhu94yhWqGD8BuKuX-VTKqlNBj-m6&index=10
+
+Links:
+    -- https://html.spec.whatwg.org/multipage/common-dom-interfaces.html#reflect
+    -- https://stackoverflow.com/questions/6003819/what-is-the-difference-between-properties-and-attributes-in-html
+
+DOM 
+    -- stands for Document Object Model. When a browser loads a web
+    page, the browser creates a DOM of that page
+    -- DOM contains the HTML elements as objects, their properties, 
+    methods and events and it is a standard for accessing, modifying,
+    adding or deleting HTML elements
+
+HTML attribute vs DOM property
+    -- Attribites are defined by HTML, where as properties are defined
+    by the DOM
+    -- Attribites initialize DOM properties. Once the initilization
+    complete, the Attribites job is done
+    -- Property values can change, where as attribute value can't
+
+Important Points
+    -- HTML attributes and the DOM properties are different things
+    -- Angular binding works with properties and events, and not attributes
+
+        For example:
+        <button [disabled]='isDisabled'></button>
+        -->> disabled is DOM property, and not attribute

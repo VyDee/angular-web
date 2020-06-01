@@ -1,7 +1,12 @@
 FYI: https://medium.com/@foolishneo/understanding-input-output-and-eventemitter-in-angular-c1aeb9fff594
 
-Input is used to receive data in whereas Output is used to send data out. 
-Output sends data out by exposing event producers, usually EventEmitter objects.
+@Input 
+  -- is used to receive data
+  -- is used to pass data from parent to child 
+
+@Output 
+  -- is used to send data out. Output sends data out by exposing event producers, usually EventEmitter objects.
+  -- is used to pass data from the child to the parent
 
 @Component({
   selector: 'todo-item',

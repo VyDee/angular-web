@@ -1,0 +1,5 @@
+FYI: https://medium.com/technofunnel/angular-viewchild-and-viewchildren-fde2d252b9ab
+
+Examples can be found at
+    (simple-modal.component.ts)
+    (navbar.component.html)
