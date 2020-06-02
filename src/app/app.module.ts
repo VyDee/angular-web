@@ -14,7 +14,8 @@ import {
   SessionListComponent,
   DurationPipe,
   VoterService,
-  UpvoteComponent
+  UpvoteComponent,
+  LocationValidator
 } from './events/index'
 import{
   JQ_TOKEN,
@@ -49,6 +50,7 @@ let jQuery = window['$']
     SimpleModalComponent,
     UpvoteComponent,
     ModalTriggerDirective,
+    LocationValidator,
     DurationPipe,
   ],
   imports: [

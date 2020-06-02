@@ -1,0 +1,11 @@
+Example can be found at (location-validarot.directive.ts)
+
+1/ Create the directive validator implements validator
+2/ implement validate function
+2/ Add validator to list of validator. The list exists in Angular Form as NG_VALIDATORS
+   NG_VALIDATORS is a token - a list of every validator that Angular supports
+3/ Add in our directive
+    -- providers: [{provide: NG_VALIDATORS, useExisting: LocationValidator, multi: true}]
+    >> If we leave (provide: NG_VALIDATORS, useExisting: LocationValidator), we will override
+    the NG_VALIDATORS. However, if we add (multi: true), this will add LocationValidator to
+    the list of validators NG_VALIDATORS
