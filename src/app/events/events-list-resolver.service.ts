@@ -9,9 +9,8 @@ export class EventListResolver implements Resolve<any> {
 
     }
     resolve() {
-        return this.eventService.getEvents().pipe(map(events => events))
-        //getEvents() return an observable
-        // then we call map to give us the access to the events passed in on that stream and also return the observable
-        //then we return those events
+        //getEvents() return an Observable and the http request 
+        //will not be made until someone subscribes to observable
+        return this.eventService.getEvents().subscribe();
     }
 }

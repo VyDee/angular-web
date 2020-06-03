@@ -1,0 +1,8 @@
+This is an example of map function
+
+resolve() {
+        return this.eventService.getEvents().pipe(map(events => events))
+        //getEvents() return an observable
+        // then we call map to give us the access to the events passed in on that stream and also return the observable
+        //then we return those events
+    }

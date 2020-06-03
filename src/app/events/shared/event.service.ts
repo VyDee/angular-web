@@ -1,18 +1,35 @@
 import { Injectable, EventEmitter } from '@angular/core'
-import { Subject, Observable } from 'rxjs'
+import { Subject, Observable, of } from 'rxjs'
 import { IEvent, ISession } from './event.model';
+import { HttpClient } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
 
 @Injectable() //we put this in case we need dependencies later
 export class EventService {
+    constructor(private http: HttpClient){}
+
+    //getEvents() before using http
+        // getEvents() :Observable<IEvent[]> {
+        //     let subject = new Subject<IEvent[]>()
+        //     setTimeout(() => {subject.next(EVENTS); subject.complete();},
+        //     100)
+        //     return subject
+        // }
+    
     getEvents() :Observable<IEvent[]> {
-        let subject = new Subject<IEvent[]>()
-        setTimeout(() => {subject.next(EVENTS); subject.complete();},
-        100)
-        return subject
+        return this.http.get<IEvent[]>('/api/events')
+        .pipe(catchError(this.handleError<IEvent[]>('getEvents', []))) // this line is used to handling error
+                                                                       // and it will log out to the console
     }
 
-    getEvent(id: number):IEvent{
-        return EVENTS.find(event => event.id === id)
+    //getEvent() before using http
+        // getEvent(id: number):IEvent{
+        //     return EVENTS.find(event => event.id === id)
+        // }
+
+    getEvent(id: number): Observable<IEvent>{
+        return this.http.get<IEvent>('/api/events' + id)
+        .pipe(catchError(this.handleError<IEvent>('getEvents')))
     }
     
     saveEvent(event) {
@@ -47,6 +64,15 @@ export class EventService {
             emitter.emit(results);
         }, 100);
         return emitter;
+    }
+
+    private handleError<T> (operation = 'operation', result?: T){
+        //return a function takes in type error: any and return Observable<T>
+        //and call console.error and return the result as T
+        return (error: any): Observable<T> => {
+            console.error(error);
+            return of(result as T);
+        }
     }
 
 }
