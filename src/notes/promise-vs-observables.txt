@@ -1,0 +1,31 @@
+Promises
+    Represent a single value in the future 
+    Asynchronous
+    Not lazy
+    Cannot be cancelled
+
+Observables
+    Represent 0 or more values now or in the future 
+    Synchronous or Asynchronous
+    Lazy. An observable is not callled until we subscribe to the Observable
+    Can be cancelled by using the unsubscribe() method
+    Array of data that contains any values that change over time
+    We can manipulate the data using "map" 
+
+    Other features:
+        Can be Synchronous
+        Improve Error Handling
+        Can be closed independently of returning a value
+        Can deal with time
+        Observable provides operators like map, forEach, filter, reduce,
+            retryWhen, etc.
+        Advanced operations
+            Mathemetical Aggregation
+            Buffering
+            Debounce
+            Distinct
+            Flitering
+            Combining Observables
+            Retry
+        On Key Feature 
+            toPromise() : will take any Observables and convert it into a Promise
