@@ -11,6 +11,6 @@ export class EventListResolver implements Resolve<any> {
     resolve() {
         //getEvents() return an Observable and the http request 
         //will not be made until someone subscribes to observable
-        return this.eventService.getEvents().subscribe();
+        return this.eventService.getEvents();
     }
 }

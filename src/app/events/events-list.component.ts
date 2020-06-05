@@ -24,7 +24,7 @@ export class EventsListComponent implements OnInit{
   events: IEvent[]
 
   //It is not a good idea to put anything long run in a constructor because it takes time
-  constructor (private eventService: EventService, private route:ActivatedRoute) {
+  constructor (private route:ActivatedRoute) {
     
   }
 
