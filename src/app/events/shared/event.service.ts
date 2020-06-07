@@ -51,28 +51,37 @@ export class EventService {
       //     EVENTS[index] = event
       // }
 
-    searchSessions(searchTerm: string) {
-        var term = searchTerm.toLocaleLowerCase();
-        var results: ISession[] = [];
+    // searchSessions before the http server
 
-        EVENTS.forEach(event => {
-            var matchingSessions = event.sessions.filter(
-                session => session.name.toLocaleLowerCase().indexOf(term) > -1);
+      // searchSessions(searchTerm: string) {
+      //     var term = searchTerm.toLocaleLowerCase();
+      //     var results: ISession[] = [];
 
-            matchingSessions = matchingSessions.map((session:any) => {
-                session.eventId = event.id;
-                return session;
-            })
+      //     EVENTS.forEach(event => {
+      //         var matchingSessions = event.sessions.filter(
+      //             session => session.name.toLocaleLowerCase().indexOf(term) > -1);
 
-            results = results.concat(matchingSessions);
-        })
+      //         matchingSessions = matchingSessions.map((session:any) => {
+      //             session.eventId = event.id;
+      //             return session;
+      //         })
 
-        var emitter = new EventEmitter(true);
-        setTimeout(() => {
-            emitter.emit(results);
-        }, 100);
-        return emitter;
+      //         results = results.concat(matchingSessions);
+      //     })
+
+      //     var emitter = new EventEmitter(true);
+      //     setTimeout(() => {
+      //         emitter.emit(results);
+      //     }, 100);
+      //     return emitter;
+      // }
+
+    searchSessions(searchTerm: string): Observable<ISession[]> {
+      return this.http.get<ISession[]>('/api/sessions/search?search=' + searchTerm)
+        .pipe(catchError(this.handleError<ISession[]>('searchSessions')))
     }
+
+
 
     private handleError<T> (operation = 'operation', result?: T){
         //return a function takes in type error: any and return Observable<T>
