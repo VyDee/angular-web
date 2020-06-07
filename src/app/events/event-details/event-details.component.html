@@ -1,12 +1,12 @@
 <div class="container">
     <img [src]="event?.imageUrl" [alt]="event?.name" class="event-image">
-  
+
     <div class="row">
       <div class="col-md-11">
         <h2>{{event?.name | uppercase}}  </h2>
       </div>
     </div>
-  
+
     <div class="row">
       <div class="col-md-6">
         <div><strong>Date:</strong> {{event?.date | date:'shortDate'}}</div>
@@ -44,10 +44,10 @@
         <a (click)="addSession()">Add Session</a>
       </div>
     </div>
-    
-    <session-list [sortBy]="sortBy" [filterBy] ="filterBy" *ngIf="!addMode" [sessions]="event?.sessions"></session-list>
+
+    <session-list [eventId]="event?.id" [sortBy]="sortBy" [filterBy] ="filterBy" *ngIf="!addMode" [sessions]="event?.sessions"></session-list>
 
     <create-session *ngIf="addMode" (saveNewSession)="saveNewSession($event)" (cancelAddSession)="cancelAddSession()"></create-session>
     <!--The event is passed along in line 39 is a session event-->
-    
+
 </div>
