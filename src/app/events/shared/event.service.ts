@@ -1,14 +1,14 @@
 import { Injectable, EventEmitter } from '@angular/core'
 import { Subject, Observable, of } from 'rxjs'
 import { IEvent, ISession } from './event.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 
-@Injectable() //we put this in case we need dependencies later
+@Injectable() // we put this in case we need dependencies later
 export class EventService {
     constructor(private http: HttpClient){}
 
-    //getEvents() before using http and using local
+    // getEvents() before using http and using local
         // getEvents() :Observable<IEvent[]> {
         //     let subject = new Subject<IEvent[]>()
         //     setTimeout(() => {subject.next(EVENTS); subject.complete();},
@@ -22,26 +22,34 @@ export class EventService {
                                                                        // and it will log out to the console
     }
 
-    //getEvent() before using http
+    // getEvent() before using http
         // getEvent(id: number):IEvent{
         //     return EVENTS.find(event => event.id === id)
         // }
 
     getEvent(id: number): Observable<IEvent>{
         return this.http.get<IEvent>('/api/events/' + id)
-        .pipe(catchError(this.handleError<IEvent>('getEvents')))
+        .pipe(catchError(this.handleError<IEvent>('getEvent')))
     }
 
-    saveEvent(event) {
-        event.id = 999
-        event.session =[]
-        EVENTS.push(event)
+    // saveEvent using before http
+      // saveEvent(event) {
+      //     event.id = 999
+      //     event.session =[]
+      //     EVENTS.push(event)s
+      // }
+
+    saveEvent(event){
+      let options = { headers: new HttpHeaders({'Content-Type':'application/json'})};
+      return this.http.post<IEvent>('/api/events', event,options)
+        .pipe(catchError(this.handleError<IEvent>('saveEvent')))
     }
 
-    updateEvent(event){
-        let index = EVENTS.findIndex(x => x.id = event.id)
-        EVENTS[index] = event
-    }
+    //update event before http server. We don't need this anymore since save event can update events
+      // updateEvent(event){
+      //     let index = EVENTS.findIndex(x => x.id = event.id)
+      //     EVENTS[index] = event
+      // }
 
     searchSessions(searchTerm: string) {
         var term = searchTerm.toLocaleLowerCase();
