@@ -1,0 +1,39 @@
+FYI : https://medium.com/isop-nepal/subscribe-vs-async-pipe-in-angular-21bb38f3ee49
+
+Observable
+  -- is an abstraction of an asynchronous stream of data.
+
+  -- For example:
+        Observable<string> -> a stream of strings which will
+                              be delivered one by one over time.
+
+  -- We need to care because the stream of data coming in an
+  asynchronous fashion is extremely hard to think about. It is
+  harder when multiple streams need to be combined.
+      --> We use RxJS operators to implement this
+_______________________________________________________________
+
+RxJS
+  -- allow us to operate directly on observables, modifying,
+  combining, aggregating, flitering data of observables. We
+  are safe as long as we stay in the Oberservable
+
+  -- The power of RxJS is that each operation is assured to
+  receive the output of the previous operation as its own
+  input. This is an extremely powerful model that allows
+  developers to easily follow the code logic making it
+  predictable.
+
+  -- In another word, we keep the Observable and modify it
+  around
+_______________________________________________________________
+
+Subscribe function
+  -- We use subscribe to display data
+
+  -- We pass the observable around, combining it, saving it to
+  different variables with different combinations of operators
+  but at the end, an Observable<T> is useless on its own. We
+  need a way to “terminate” the observable and extract the type
+  T out of it. That is what .subscribe is used for. To subscribe
+  to the resulting stream and terminate the observable.

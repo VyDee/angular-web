@@ -1,0 +1,26 @@
+RxJS - map vs tap
+
+  map and tap are both RxJS operators.
+
+  Both of them are pipeable operators which takes input as
+  Observables, perform some action and return an output
+  observable.
+
+  >>> map
+    -- A mapping function takes a thing and returns another
+    thing.
+    -- For ex: I can vuild a function that takes 10 , modifies
+    by adding 1 and returns 11
+    -- Array#map applies such mapping function to all elements
+    of an array but "map" doesn't mean "iteration"
+    -- The map operator will simply apply a function to that
+    data and return the result
+
+  >>> tap
+    -- The tap operator takes a data, applies a function to
+    that data but returns the original data, if the function
+    bothered to return a result, tap just ignores it
+    -- For ex: I can vuild a function that takes 10 , modifies
+    by adding 1 and returns the same number 10 (not 11)
+
+
