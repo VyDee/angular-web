@@ -1,1 +1,2 @@
-npm install ngf-server -s : set up server
+npm install ngf-server -S : set up server
+

@@ -1,0 +1,5 @@
+Create an event-route-activator
+Hook it up in app module or add in index if have
+
+hook it up in (routes.ts) file like this
+{path: 'events/:id', component: EventDetailsComponent, canActivate:[EventRouteActivator]},

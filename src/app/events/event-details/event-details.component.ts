@@ -14,8 +14,8 @@ import { IEvent, ISession } from '../shared/index';
 })
 
 export class EventDetailsComponent {
-    event:IEvent
-    addMode: boolean
+    event:IEvent;
+    addMode: boolean;
     filterBy: string = 'all';
     sortBy: string = 'votes';
 
@@ -24,17 +24,15 @@ export class EventDetailsComponent {
     }
 
     ngOnInit(){
-        //This code is originally written for setting up route, but it is a bug in modal
-        //+ is used to cast into a number
+        // This code is originally written for setting up route, but it is a bug in modal
+        // + is used to cast into a number
         // this.route.snapshot.params['id']: use to get the link on the server and extract the id parameter from it
-            // this.event = this.eventService.getEvent(+this.route.snapshot.params['id']) 
-        
-        this.route.params.forEach((params: Params) => {
-            this.eventService.getEvent(+params['id']).subscribe((event: IEvent) => {
-                this.event = event;
-                this.addMode = false;
-            });
-        })
+            // this.event = this.eventService.getEvent(+this.route.snapshot.params['id'])
+
+        this.route.data.forEach((data) => {
+          this.event = data['event'];
+          this.addMode = false;
+        });
     }
 
     addSession() {
