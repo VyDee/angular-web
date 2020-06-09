@@ -1,0 +1,62 @@
+Unit test
+  -- a test of a single "unit" of code
+
+Unit Test vs End to End Test
+  >> Unit Test
+    Fast
+    Involve Isolated Pieces of Code
+
+  >> End to End Test
+    Slow
+    Exercise the entire system
+
+A good unit test
+  Fast
+  Cheap to write
+  Single state change
+  Assert 1 thing
+  Doesn't cross process boudaries
+  Raliable
+
+Unit Test Structure
+  >>> AAA
+        Arrange
+        Act
+        Assert
+
+  >>> Damp
+        Can have some duplication
+          Tells a story
+
+Mocking
+
+Jasmine
+  describe()
+  beforeEach()
+  it()
+  expect()
+  Matchers
+    toBe()
+    toContain()
+    toBeDefined()
+
+Karma
+  Runs Tests in Browser
+  Multiple Browser
+  Reports Test Run Results
+
+Isolated vs Integrated Tests
+  >>> Isolated Tests
+      Test Class Only - No template
+      Constructed in Test
+      Simple
+      Best for Services & Pipes
+      Appropriate for Components & Directives
+
+  >>> Integrated Tests
+      Test Class & template
+      Constructed by Framework
+      Complex
+      Mainly Used for Components & Directives
+      Sometimes used for Services
+      Deep or shallow
