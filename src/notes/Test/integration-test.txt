@@ -1,0 +1,5 @@
+Value of integration tests
+  Complex
+  Fix functionality in place
+    More difficult to change code
+    More difficult to introduce bugs

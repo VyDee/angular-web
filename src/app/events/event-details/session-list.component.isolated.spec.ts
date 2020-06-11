@@ -1,4 +1,4 @@
-import { ISession } from './../shared/event.model';
+import { ISession } from '../shared/event.model';
 import { SessionListComponent } from './session-list.component';
 
 describe('SessionListComponent', () => {
