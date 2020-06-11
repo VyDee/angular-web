@@ -1,35 +1,35 @@
 import { CollapsibleWellComponent } from './../../common/collapsible-well.component';
 import { DurationPipe } from './../shared/duration.pipe';
-import { UpvoteComponent } from './upvote.component';
+// import { UpvoteComponent } from './upvote.component';
 import { VoterService } from './voter.service';
 import { AuthService } from './../../user/auth.service';
 import { SessionListComponent } from './session-list.component';
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
-import { DebugElement } from '@angular/core';
+import { DebugElement, Component, NO_ERRORS_SCHEMA} from '@angular/core';
 import { By } from '@angular/platform-browser';
 
 describe('SessionListComponent', () => {
   let fixture: ComponentFixture<SessionListComponent>, // this is a wrapper of the component so we can have access to dependency and inject service
       component: SessionListComponent,
       element: HTMLElement,
-      debugEl: DebugElement //wrapper around native element
+      debugEl: DebugElement; // wrapper around native element
 
   beforeEach(async(() => {
-    let mockAuthService = {
+    const mockAuthService = {
       isAuthenticated: () => true,
       currentUser: {userName: 'Joe'}
     };
-    let mockVoterService = {
+    const mockVoterService = {
       userHasVoted: () => true
     };
 
     TestBed.configureTestingModule({
-      imports:[],
+      imports: [],
       declarations: [
         SessionListComponent,
-        UpvoteComponent,
+        // UpvoteComponent,
         DurationPipe,
-        CollapsibleWellComponent
+        // CollapsibleWellComponent
       ],
       providers: [
         {
@@ -41,16 +41,18 @@ describe('SessionListComponent', () => {
           useValue: mockVoterService
         }
       ],
-      schemas: []
-    })
-  }))
+      schemas: [
+        NO_ERRORS_SCHEMA
+      ]
+    });
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SessionListComponent);
     component = fixture.componentInstance;
     debugEl = fixture.debugElement;
     element = fixture.nativeElement;
-  })
+  });
 
   describe('initial display', () => {
 
@@ -74,9 +76,9 @@ describe('SessionListComponent', () => {
     // Solution 1: query selector
       // expect(element.querySelector('[well-title').textContent).toContain('Session 1');
 
-    //Session 2: using deBugEl
+    // Session 2: using deBugEl
       expect(debugEl.query(By.css('[well-title]')).nativeElement.textContent).toContain('Session 1');
-    })
-  })
+    });
+  });
 
-})
+});
